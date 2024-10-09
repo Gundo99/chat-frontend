@@ -4,15 +4,21 @@ import { addNumbers, checkNumbers } from '../services/api';
 const NumberManagement: React.FC = () => {
   const [numbers, setNumbers] = useState('');
   const [result, setResult] = useState('');
+  const [number, setNumber] = useState('');
+  const [whatsapp, setWhatsapp] = useState(true);
+  const [userId, setUserId] = useState(0);
 
   const handleAddNumbers = async () => {
     try {
       const formattedNumbers = numbers.split('\n').map(number => ({
         telephone_number: number.trim(),
-        has_whatsapp: true // You might want to add a way to set this dynamically
+        has_whatsapp: false,
+        userUid: 8
       }));
 
-      const response = await addNumbers(formattedNumbers);
+
+      
+      const response = await addNumbers(number, whatsapp, userId);
       setResult(JSON.stringify(response));
     } catch (error) {
       setResult('Error adding numbers');
@@ -30,6 +36,7 @@ const NumberManagement: React.FC = () => {
 
   return (
     <div>
+      <h1 className="text-2xl font-bold mb-4">Add/Check Number</h1>
       <textarea
         value={numbers}
         onChange={(e) => setNumbers(e.target.value)}

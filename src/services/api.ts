@@ -21,13 +21,13 @@ function isNumberEntryArray(data: unknown): data is NumberEntry[] {
   );
 }
 
-export const login = async (username: string, password: string) => {
-  const response = await axios.post(`${API_URL}/user/register`, { username, password });
+export const login = async (username: string, full_name:string, password: string) => {
+  const response = await axios.post(`${API_URL}/user/register`, { username, full_name, password });
   return response.data;
 };
 
-export const addNumbers = async (numbers: { telephone_number: string; has_whatsapp: boolean }[]) => {
-  const response = await axios.post(`${API_URL}/numbers/add`, { numbers });
+export const addNumbers = async ( telephone_number: string, has_whatsapp: boolean, id:number) => {
+  const response = await axios.post(`${API_URL}/numbers/add`, { telephone_number, has_whatsapp, id });
   return response.data;
 };
 
